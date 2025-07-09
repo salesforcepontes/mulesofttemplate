@@ -1,0 +1,16 @@
+#listener
+
+http:
+  port: "8081"
+  timeout: "30000"
+  
+#conexão salesforce
+
+salesforce:
+  consumerKey: ""
+  password: ""
+  keyStore: ""
+  principal: ""
+  endpoint: ""
+  maxRetries: "5"
+  millisBetweenRetries: "10000"

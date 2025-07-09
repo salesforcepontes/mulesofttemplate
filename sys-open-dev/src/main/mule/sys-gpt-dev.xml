@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="sys-gpt-devFlow1" doc:id="8e910ef6-3ba3-42f5-a785-9fa91f38b43e" >
+		<http:listener doc:name="Listener" doc:id="af7b8037-f974-41ba-a690-9482c5583cfe" config-ref="HTTP_Listener_config" path="/api"/>
+		<logger level="INFO" doc:name="Logger Init" doc:id="79ea8276-500c-4703-b588-ca9d78c570cf" message="#[payload]" />
+		<ee:transform doc:name="payload" doc:id="2c427660-b079-4611-8027-53f1e7b53976">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<ee:transform doc:name="var cep" doc:id="8b335147-a6e6-41f3-9c8a-ad7abca4a171">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/java
+---
+{
+}]]></ee:set-payload>
+			</ee:message>
+			<ee:variables>
+				<ee:set-variable variableName="cep"><![CDATA[%dw 2.0
+output application/json
+---
+payload.cep]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger Vars Cep" doc:id="8cd8d949-dd2c-48cc-bdab-820598e1f24a" message="#[vars.cep]" />
+	</flow>
+</mule>
