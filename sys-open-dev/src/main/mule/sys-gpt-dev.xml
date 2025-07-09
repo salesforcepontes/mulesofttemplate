@@ -16,21 +16,5 @@ output application/json
 payload]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<ee:transform doc:name="var cep" doc:id="8b335147-a6e6-41f3-9c8a-ad7abca4a171">
-			<ee:message>
-				<ee:set-payload><![CDATA[%dw 2.0
-output application/java
----
-{
-}]]></ee:set-payload>
-			</ee:message>
-			<ee:variables>
-				<ee:set-variable variableName="cep"><![CDATA[%dw 2.0
-output application/json
----
-payload.cep]]></ee:set-variable>
-			</ee:variables>
-		</ee:transform>
-		<logger level="INFO" doc:name="Logger Vars Cep" doc:id="8cd8d949-dd2c-48cc-bdab-820598e1f24a" message="#[vars.cep]" />
 	</flow>
 </mule>
